@@ -59,16 +59,18 @@ def recieve_result():
 	print "Body: " + bodyValue
 	print "From: " + fromValue
 	print "To: " + toValue
-	
+
+	value = False
+
+	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
+		value = True
+
+	payload = {'ispOutage': value}
+
 	return "Test"
 
 
-	# value = False
 
-	# if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
-	# 	value = True
-
-	# payload = {'ispOutage': value}
 	# request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", params=payload)
 	# return str(value)
 
