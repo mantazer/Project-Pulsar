@@ -110,13 +110,12 @@ def recieve_result():
 
 	payload = {'ispOutage': value}
 	#pdb.set_trace()
-	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/ispreply", data=payload)
 
 	return "Test"
 
 @app.route("/isp_reply", methods=['GET', 'POST'])
 def show_result():
-	resp = twilio.twiml.Response()
 	ispOutage = request.form['ispOutage']
 
 	# if(ispOutage):
