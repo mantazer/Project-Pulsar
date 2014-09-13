@@ -6,6 +6,7 @@ import urllib2
 import pdb
 import json
 import requests
+import sendgrid
  
 app = Flask(__name__)
 
@@ -28,7 +29,7 @@ def start_process():
 	    to="+14342008920",    # Replace with your phone number
 	    from_="+15033964667") # Replace with your Twilio number
 
-	print message.sid
+	#print message.sid
 	return "Hello World"
 
 @app.route("/ISPFault", methods=['GET', 'POST'])
@@ -38,7 +39,7 @@ def test_bench_ISP():
     bodyValue = request.form['Body']
     toValue = request.form['To']
 
-    print bodyValue
+    #print bodyValue
 
     if(str(bodyValue) == "OUT"):
     	outOrNot = random.randint(0,9)
@@ -48,8 +49,8 @@ def test_bench_ISP():
     		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
     else:
     	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-    print str(resp)
-    print "ISP Fault Done"
+    #print str(resp)
+    #print "ISP Fault Done"
     return str(resp)
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
@@ -58,9 +59,9 @@ def recieve_result():
 	fromValue = request.form['From']
 	bodyValue = request.form['Body']
 	toValue = request.form['To']
-	print "Body: " + bodyValue
-	print "From: " + fromValue
-	print "To: " + toValue
+	# print "Body: " + bodyValue
+	# print "From: " + fromValue
+	# print "To: " + toValue
 
 	value = "False"
 
@@ -78,10 +79,10 @@ def show_result():
     resp = twilio.twiml.Response()
     ispOutage = request.form['ispOutage']
 
-    if(ispOutage):
-    	print "This is working"
-    else:
-    	print "This is working (2)"
+    # if(ispOutage):
+    # 	print "This is working"
+    # else:
+    # 	print "This is working (2)"
 
     print "Outage: " + str(ispOutage)
 
