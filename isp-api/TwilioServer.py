@@ -12,12 +12,22 @@ def hello_monkey():
     resp.message("Hello, Mobile Monkey")
     return str(resp)
 
-@app.route("/NotShortCode", methods=['GET', 'POST'])
-def test_bench():
+@app.route("/ISPFault", methods=['GET', 'POST'])
+def test_bench_ISP():
     """Respond to incoming calls with a simple text message."""
  
     resp = twilio.twiml.Response()
-    resp.message("Hello, Mobile Monkey")
+    testing = response.data
+    # resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
+    resp.message(str(testing))
+    return str(resp)
+
+@app.route("/NotISPFault", methods=['GET', 'POST'])
+def test_bench_ISP():
+    """Respond to incoming calls with a simple text message."""
+ 
+    resp = twilio.twiml.Response()
+    resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
     return str(resp)
 
 def sendTwilioSMS():
