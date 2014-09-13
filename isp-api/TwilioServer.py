@@ -38,7 +38,7 @@ def start_process():
 	sg = sendgrid.SendGridClient(SendGridUserName, SendGridPassword)
 
 	message = sendgrid.Mail()
-	message.add_to('Gautam <vrk7bp@virginia.edu>')
+	message.add_to('Gautam <gautam@virginia.edu>')
 	# message.add_to(email)
 	message.set_subject('Is there a Power Outage at your house?')
 	message.set_html(htmlForEmail)
