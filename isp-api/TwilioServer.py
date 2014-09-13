@@ -36,7 +36,7 @@ def start_process():
 
 	#sending e-mail
 	htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
-	#sg = sendgrid.SendGridClient(SendGridUserName, SendGridPassword)
+	sg = sendgrid.SendGridClient(SendGridUserName, SendGridPassword)
 
 	message = sendgrid.Mail()
 	message.add_to('Gautam <raju@email.virginia.edu>')
@@ -44,7 +44,7 @@ def start_process():
 	message.set_subject('Is there a Power Outage at your house?')
 	message.set_html(htmlForEmail)
 	message.set_from(FromEmail)
-	#status, msg = sg.send(message)
+	status, msg = sg.send(message)
 
 	#print message.sid
 	return "Hello World"
@@ -131,4 +131,4 @@ def sendgrid():
 	return "HTTP/1.1 200 OK"
  
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", threaded=True)
+    app.run(host="0.0.0.0", threaded=True, debug=True)
