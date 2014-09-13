@@ -6,8 +6,13 @@ import urllib2
 import pdb
 import json
 import requests
+import sendgrid
  
 app = Flask(__name__)
+
+SendGridUserName = "b_ball225"
+SendGridPassword = "Basketball1"
+FromEmail = "project_pulsar@gautamk.us"
 
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
@@ -28,7 +33,19 @@ def start_process():
 	    to="+14342008920",    # Replace with your phone number
 	    from_="+15033964667") # Replace with your Twilio number
 
-	print message.sid
+	#sending e-mail
+	htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
+	sg = sendgrid.SendGridClient(SendGridUserName, SendGridPassword)
+
+	message = sendgrid.Mail()
+	message.add_to('Gautam <raju@email.virginia.edu>')
+	# message.add_to(email)
+	message.set_subject('Is there a Power Outage at your house?')
+	message.set_html(htmlForEmail)
+	message.set_from(FromEmail)
+	status, msg = sg.send(message)
+
+	#print message.sid
 	return "Hello World"
 
 @app.route("/ISPFault", methods=['GET', 'POST'])
@@ -38,7 +55,7 @@ def test_bench_ISP():
     bodyValue = request.form['Body']
     toValue = request.form['To']
 
-    print bodyValue
+    #print bodyValue
 
     if(str(bodyValue) == "OUT"):
     	outOrNot = random.randint(0,9)
@@ -48,8 +65,8 @@ def test_bench_ISP():
     		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
     else:
     	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-    print str(resp)
-    print "ISP Fault Done"
+    #print str(resp)
+    #print "ISP Fault Done"
     return str(resp)
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
@@ -58,9 +75,9 @@ def recieve_result():
 	fromValue = request.form['From']
 	bodyValue = request.form['Body']
 	toValue = request.form['To']
-	print "Body: " + bodyValue
-	print "From: " + fromValue
-	print "To: " + toValue
+	# print "Body: " + bodyValue
+	# print "From: " + fromValue
+	# print "To: " + toValue
 
 	value = "False"
 
@@ -69,7 +86,7 @@ def recieve_result():
 
 	payload = {'ispOutage': value}
 	#pdb.set_trace()
-	r = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
 
 	return "Test"
 
@@ -78,10 +95,10 @@ def show_result():
     resp = twilio.twiml.Response()
     ispOutage = request.form['ispOutage']
 
-    if(ispOutage):
-    	print "This is working"
-    else:
-    	print "This is working (2)"
+    # if(ispOutage):
+    # 	print "This is working"
+    # else:
+    # 	print "This is working (2)"
 
     print "Outage: " + str(ispOutage)
 
