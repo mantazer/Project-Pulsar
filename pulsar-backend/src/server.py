@@ -1,10 +1,12 @@
 from flask import Flask, request, Response
+import pdb
 
 app = Flask(__name__)
 
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
+        pdb.set_trace()
         payload = request.form
         return Response(response=json.dumps({}), status=200)         
 
