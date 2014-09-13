@@ -54,6 +54,7 @@ def test_bench_ISP():
 def recieve_result():
 	#pdb.set_trace()
 	print request.form
+	return 200
 	# fromValue = request.form['From']
 	# bodyValue = request.form['Body']
 	# toValue = request.form['To']
