@@ -10,5 +10,5 @@ class Beacon:
         self.is_dead = 0
 
     def jsonify_beacon(self):
-        payload = {'h_address': self.h_address, 'e_address': self.e_address, 'twilio_phone': self.twilio_phone, 'personal_phone': self.personal_phone, 'last_pulse': self.last_pulse, 'is_dead': self.is_dead}
+        payload = {'h_address': self.h_address, 'e_address': self.e_address, 'twilio_phone': self.twilio_phone, 'personal_phone': self.personal_phone}
         return payload
