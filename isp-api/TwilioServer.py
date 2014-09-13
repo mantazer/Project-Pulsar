@@ -116,9 +116,11 @@ def sendgrid():
 	# Get some header information
 	to_address = envelope['to'][0]
 	from_address = envelope['from']
+	text = envelope['text']
 
 	print to_address
 	print from_address
+	print text
 
 	value = "True"
 
