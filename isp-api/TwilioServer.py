@@ -147,8 +147,9 @@ def sendgrid():
 
 	value = "True"
 
-	payload = {'ispOutage': value}
-	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+	payload = {'ispOutage': value, 'twilio_number': number}
+	#pdb.set_trace()
+	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/ispreply", data=payload)
 
 	return "HTTP/1.1 200 OK"
  
