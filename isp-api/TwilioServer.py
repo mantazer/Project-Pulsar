@@ -19,10 +19,10 @@ def test_bench_ISP():
     resp = twilio.twiml.Response()
     fromValue = request.form['From']
     bodyValue = request.form['Body']
-    print bodyValue
-    # resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-    #resp.message(str("testing"))
-    resp.message("Hello, Mobile Monkey")
+    if(str(bodyValue) == "OUT"):
+    	resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
+    else:
+    	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
     return str(resp)
 
 # @app.route("/NotISPFault", methods=['GET', 'POST'])
