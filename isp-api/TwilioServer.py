@@ -67,7 +67,7 @@ def recieve_result():
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
 		value = "True"
 
-	payload = json.dumps({'ispOutage': value})
+	payload = {'ispOutage': value}
 	#pdb.set_trace()
 	r = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", data=payload)
 
