@@ -4,6 +4,7 @@ from twilio.rest import TwilioRestClient
 import random
 import urllib2
 import pdb
+import json
  
 app = Flask(__name__)
 
@@ -67,7 +68,7 @@ def recieve_result():
 
 	payload = {'ispOutage': value}
 
-	request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+	request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", data=json.dumps(payload))
 
 	return "Test"
 
