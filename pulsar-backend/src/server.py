@@ -6,8 +6,8 @@ app = Flask(__name__)
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
-        pdb.set_trace()
         payload = request.form
+        pdb.set_trace()
         return Response(response=json.dumps({}), status=200)         
 
 @app.route('/listen')
