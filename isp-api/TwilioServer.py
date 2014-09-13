@@ -17,10 +17,11 @@ def test_bench_ISP():
     """Respond to incoming calls with a simple text message."""
  
     resp = twilio.twiml.Response()
-    testing = request.data
+    testing = request
     print testing
     # resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-    resp.message(str("testing"))
+    #resp.message(str("testing"))
+    resp.message("Hello, Mobile Monkey")
     return str(resp)
 
 # @app.route("/NotISPFault", methods=['GET', 'POST'])
