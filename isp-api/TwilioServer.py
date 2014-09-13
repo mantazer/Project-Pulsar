@@ -108,7 +108,7 @@ def recieve_result():
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
 		value = "True"
 
-	payload = {'ispOutage': value}
+	payload = {'ispOutage': value, 'twilio_number': number}
 	#pdb.set_trace()
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/ispreply", data=payload)
 
