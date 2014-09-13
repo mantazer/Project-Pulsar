@@ -10,4 +10,5 @@ class MongoDB:
             beacon_data = {'h_address': beacon.h_address, 'e_address': beacon.e_address, 'twilio_phone': beacon.twilio_phone, 'personal_phone': beacon.personal_phone, 'last_pulse': beacon.last_pulse, 'is_dead': beacon.is_dead}
             beacon_id = self.beacon_collection.insert(beacon_data)
             return beacon_id
+            
 

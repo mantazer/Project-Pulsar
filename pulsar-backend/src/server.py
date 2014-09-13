@@ -3,6 +3,7 @@ from flask import Flask, request, Response
 from model import Beacon
 import json
 import pdb
+import threading
 
 app = Flask(__name__)
 mongodb = MongoDB()
@@ -29,8 +30,9 @@ def register():
 
 @app.route('/listen', methods=['POST'])
 def listen():
+    
+    # TODO: Scale this via threading
     # hit /SendRequest
-    # respone key ispOutage
     return 'listening...'
 
 @app.route('/powerreply', methods=['POST'])
