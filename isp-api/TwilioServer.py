@@ -90,4 +90,4 @@ def show_result():
 #http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply
  
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", threaded=True)
