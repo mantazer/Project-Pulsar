@@ -1,5 +1,6 @@
 from model import Beacon
 import requests
+import time
 
 PROTOCOL = 'http'
 HOST = 'ec2-54-68-73-74.us-west-2.compute.amazonaws.com'
@@ -15,9 +16,12 @@ def prompt():
     e_address = raw_input('Enter email address: ')
     twilio_phone = raw_input('Enter provided twilio phone number (+1##########): ')
     personal_phone = raw_input('Enter personal phone number: (+1##########): ')
-    return Beacon(h_address, e_address, twilio_phone, personal_phone, 0, 0)
+    last_pulse = time.time()
+    is_dead = 0
+    return Beacon(h_address, e_address, twilio_phone, personal_phone, last_pulse, is_dead)
 
 def register(beacon):
+    print beacon.last_pulse
     payload = Beacon.jsonify_beacon(beacon)
     r = requests.post(REGISTER_URL, data=payload)
     
