@@ -1,11 +1,12 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 
 app = Flask(__name__)
 
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
-       print request.form
+        payload = request.form
+        return Response(response=json.dumps({}))         
 
 @app.route('/listen')
 def listen():
