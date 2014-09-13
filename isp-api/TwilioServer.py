@@ -134,6 +134,8 @@ def show_result():
 @app.route("/inbound", methods=['POST'])
 def sendgrid():
 
+	global number
+
 
 	# Consume the entire email
 	envelope = simplejson.loads(request.form.get('envelope'))
