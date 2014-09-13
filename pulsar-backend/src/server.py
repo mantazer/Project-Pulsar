@@ -8,6 +8,10 @@ import threading
 app = Flask(__name__)
 mongodb = MongoDB()
 
+@app.route('/')
+def index():
+    return 'working'
+
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
@@ -30,9 +34,10 @@ def register():
 
 @app.route('/listen', methods=['POST'])
 def listen():
-    
     # TODO: Scale this via threading
     # hit /SendRequest
+    t = threading.Thread(target=mongodb.find_outdated, 1)
+    t.start()
     return 'listening...'
 
 @app.route('/powerreply', methods=['POST'])
@@ -41,6 +46,7 @@ def parse_reply():
     print payload.get('powerOutage')
     print payload.get('twilioNumber')
     return 'hi'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
