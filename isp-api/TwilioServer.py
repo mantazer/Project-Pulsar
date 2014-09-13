@@ -31,11 +31,12 @@ def start_process():
 	auth_token  = "f22d67391209d2a4f8f54266cd721978"
 	client = TwilioRestClient(account_sid, auth_token)
 
-	emailValue = request.form['e_address']
-	address = request.form['h_address']
-	number = request.form['twilio_phone']
-	personalNumber = request.form['personal_phone']
+	value = request.form
 
+	emailValue = value.get('e_address')
+	address = value.get('h_address')
+	number = value.get('twilio_phone')
+	personalNumber = value.get('personal_phone')
 
 	message = client.messages.create(body="OUT",
 		to="+14342008920",    # Replace with your phone number
@@ -52,9 +53,12 @@ def start_process():
 def test_bench_ISP():
 
 	resp = twilio.twiml.Response()
-	fromValue = request.form['From']
-	bodyValue = request.form['Body']
-	toValue = request.form['To']
+
+	value = request.form
+
+	fromValue = value.get('From')
+	bodyValue = value.get('Body')
+	toValue = value.get('To')
 
 	#print bodyValue
 
@@ -88,10 +92,11 @@ def recieve_result():
 	client = TwilioRestClient(account_sid, auth_token)
 
 	global numberTwo
-	# pdb.set_trace()
-	fromValue = request.form['From']
-	bodyValue = request.form['Body']
-	toValue = request.form['To']
+	value = request.form
+
+	fromValue = value.get('From')
+	bodyValue = value.get('Body')
+	toValue = value.get('To')
 	# print "Body: " + bodyValue
 	# print "From: " + fromValue
 	# print "To: " + toValue
@@ -100,8 +105,10 @@ def recieve_result():
 
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
 		value = "False"
+	else if(str(bodyValue).strip().lower() == "yes"):
+		value = "yes"
 
-	if(value):
+	if(value == "True"):
 		htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
 		sg = SendGridClient(SendGridUserName, SendGridPassword)
 
@@ -112,9 +119,12 @@ def recieve_result():
 		message.set_from(FromEmail)
 		status, msg = sg.send(message)
 
-		message = client.messages.create(body="We think that your house may have a power outage. If this is true, simply reply to this text with any response so that the Electricty Supplier can serve you faster.",
+		message = client.messages.create(body="We think that your house may have a power outage. If this is true, simply reply to this text with a 'yes' so that the Electricty Supplier can serve you faster.",
 		to=str(personalNumber),    # Replace with your phone number
 		from_=str(number)) # Replace with your Twilio number
+
+	else if(value == "yes"):
+		value = "True"
 
 	payload = {'powerOutage': value, 'twilioNumber': number}
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
