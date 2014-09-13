@@ -46,6 +46,7 @@ def test_bench_ISP():
     else:
     	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
     print str(resp)
+    print "ISP Fault Done"
     return str(resp)
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
