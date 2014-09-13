@@ -11,7 +11,7 @@ REGISTER_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + REGISTER_ENDPOINT
 
 
 def prompt():
-    h_address = raw_input('Enter home address (Street address, City, State Zip: ')
+    h_address = raw_input('Enter home address (Street address, City, State Zip): ')
     e_address = raw_input('Enter email address: ')
     twilio_phone = raw_input('Enter provided twilio phone number (+1##########): ')
     personal_phone = raw_input('Enter personal phone number: (+1##########): ')
