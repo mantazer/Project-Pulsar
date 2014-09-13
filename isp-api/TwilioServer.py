@@ -110,7 +110,7 @@ def recieve_result():
 		message.set_from(FromEmail)
 		status, msg = sg.send(message)
 
-		message = client.messages.create(body="We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster.",
+		message = client.messages.create(body="We think that your house may have a power outage. If this is true, simply reply to this text with any response so that the Electricty Supplier can serve you faster.",
 		to=str(personalNumber),    # Replace with your phone number
 		from_=str(number)) # Replace with your Twilio number
 
