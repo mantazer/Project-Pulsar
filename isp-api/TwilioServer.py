@@ -7,13 +7,14 @@ import pdb
 import json
 import requests
 import sendgrid
+from sendgrid import SendGridClient, Mail
 import simplejson
  
 app = Flask(__name__)
 
-SendGridUserName = "b_ball225"
+SendGridUserName = "b-ball225"
 SendGridPassword = "Basketball1"
-FromEmail = "project_pulsar@gautamk.us"
+FromEmail = "inbound@b-ball225.bymail.in"
 
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
@@ -22,9 +23,9 @@ def start_process():
 	auth_token  = "f22d67391209d2a4f8f54266cd721978"
 	client = TwilioRestClient(account_sid, auth_token)
 
-	# email = request.form['emailAddress']
- #    address = request.form['address']
- #    number = request.form['phoneNumber']
+	# email = request.form['e_address']
+ #    address = request.form['h_address']
+ #    number = request.form['phone']
 
 	# message = client.messages.create(body="OUT",
 	#     to="+14342008920",    # Replace with your phone number
@@ -36,9 +37,9 @@ def start_process():
 
 	#sending e-mail
 	htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
-	sg = sendgrid.SendGridClient(SendGridUserName, SendGridPassword)
+	sg = SendGridClient(SendGridUserName, SendGridPassword)
 
-	message = sendgrid.Mail()
+	message = Mail()
 	message.add_to('Gautam <raju@email.virginia.edu>')
 	# message.add_to(email)
 	message.set_subject('Is there a Power Outage at your house?')
@@ -105,9 +106,10 @@ def show_result():
 
     return str(ispOutage)
 
-@app.route("/project_pulsar", methods=['POST'])
+#For Sendgrid
+@app.route("/inbound", methods=['POST'])
 def sendgrid():
-	print "HTTP/1.1 200 OK"
+
 
 	# Consume the entire email
 	envelope = simplejson.loads(request.form.get('envelope'))
@@ -115,16 +117,19 @@ def sendgrid():
 	# Get some header information
 	to_address = envelope['to'][0]
 	from_address = envelope['from']
+	#text = envelope['text']
 
 	print to_address
 	print from_address
+	
+	#print text
 
 	value = "True"
 
 	payload = {'ispOutage': value}
 	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
 
-	return value
+	return "HTTP/1.1 200 OK"
  
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", threaded=True)
+    app.run(host="0.0.0.0", threaded=True, debug=True)
