@@ -10,6 +10,6 @@ class Beacon:
         self.phone = '+15033964667' # testing purposes
 
     def jsonify_beacon(self):
-        payload = {'address': self.h_address, 'emailAddress': self.e_address, 'phoneNumber': self.phone}
+        payload = {'h_address': self.h_address, 'e_address': self.e_address, 'phone': self.phone}
         return payload
 
