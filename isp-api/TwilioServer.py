@@ -61,10 +61,10 @@ def recieve_result():
 	print "From: " + fromValue
 	print "To: " + toValue
 
-	value = False
+	value = "False"
 
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
-		value = True
+		value = "True"
 
 	payload = {'ispOutage': value}
 
