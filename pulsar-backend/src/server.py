@@ -36,7 +36,7 @@ def register():
 def listen():
     # TODO: Scale this via threading
     # hit /SendRequest
-    t = threading.Thread(target=mongodb.find_outdated, 1)
+    t = threading.Thread(target=mongodb.find_outdated, args=(1,))
     t.start()
     return 'listening...'
 
