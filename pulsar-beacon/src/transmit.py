@@ -13,8 +13,9 @@ REGISTER_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + REGISTER_ENDPOINT
 def prompt():
     h_address = raw_input('Enter home address (Street address, City, State Zip: ')
     e_address = raw_input('Enter email address: ')
-    phone = raw_input('Enter phone number (+1##########): ')
-    return Beacon(h_address, e_address, phone)
+    twilio_phone = raw_input('Enter provided twilio phone number (+1##########): ')
+    personal_phone = raw_input('Enter personal phone number: (+1##########): ')
+    return Beacon(h_address, e_address, twilio_phone, personal_phone)
 
 def register(beacon):
     payload = Beacon.jsonify_beacon(beacon)

@@ -11,13 +11,15 @@ mongodb = MongoDB()
 def register():
     if request.method == 'POST':
         payload = request.form
-        #TODO: make sure all data comes in
          
         h_address = payload.get('h_address')
         e_address = payload.get('e_address')
-        phone = payload.get('phone')
+        twilio_phone = payload.get('twilio_phone')
+        personal_phone = payload.get('personal_phone')
+        last_pulse = payload.get('last_pulse')
+        is_dead = payload.get('is_dead')
         
-        b = Beacon(h_address, e_address, phone)
+        b = Beacon(h_address, e_address, twilio_phone, personal_phone, last_pulse, is_dead)
         beacon_id = mongodb.add_if_not_exists(b)
 
         if beacon_id is not None:
@@ -25,7 +27,7 @@ def register():
         print 'db insertion failed'
         return Response(response=json.dumps({}), status=500)
 
-@app.route('/listen')
+@app.route('/listen', methods=['POST'])
 def listen():
     # hit /SendRequest
     # respone key ispOutage
