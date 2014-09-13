@@ -67,11 +67,13 @@ def recieve_result():
 
 	payload = {'ispOutage': value}
 
+	request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+
 	return "Test"
 
 
 
-	# request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", params=payload)
+
 	# return str(value)
 
 @app.route("/isp_reply", methods=['GET', 'POST'])
