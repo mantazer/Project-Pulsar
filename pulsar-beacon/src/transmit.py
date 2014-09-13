@@ -1,4 +1,3 @@
-from db import MongoDB
 from model import Beacon, prompt
 import requests
 
