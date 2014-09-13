@@ -14,6 +14,11 @@ def register():
     b = prompt()
     payload = Beacon.jsonify_beacon(b)
     r = requests.post(REGISTER_URL, data=payload)
+    
+    if r.ok:
+        print 'Registration successful!'
+    else:
+        print "Registration failed"
 
 def pulse():
     return 'pulse'
