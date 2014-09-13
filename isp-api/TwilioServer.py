@@ -10,6 +10,10 @@ import sendgrid
  
 app = Flask(__name__)
 
+SendGridUserName = "b_ball225"
+SendGridPassword = "Basketball1"
+FromEmail = "project_pulsar@gautamk.us"
+
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
 def start_process():
@@ -28,6 +32,18 @@ def start_process():
 	message = client.messages.create(body="OUT",
 	    to="+14342008920",    # Replace with your phone number
 	    from_="+15033964667") # Replace with your Twilio number
+
+	#sending e-mail
+	htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
+	sg = sendgrid.SendGridClient(SendGridUserName, SendGridPassword)
+
+	message = sendgrid.Mail()
+	message.add_to('Gautam <vrk7bp@virginia.edu>')
+	# message.add_to(email)
+	message.set_subject('Is there a Power Outage at your house?')
+	message.set_html(htmlForEmail)
+	message.set_from(FromEmail)
+	status, msg = sg.send(message)
 
 	#print message.sid
 	return "Hello World"
