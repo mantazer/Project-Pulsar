@@ -39,7 +39,7 @@ def register():
 def listen():
     payload = request.form
     h_address = payload.get('h_address')
-    db.beacon_collection.update({'h_address': h_address}, {'$set': {'last_pulse': time.time()}}, upsert = False)
+    mongodb.beacon_collection.update({'h_address': h_address}, {'$set': {'last_pulse': time.time()}}, upsert = False)
     return 'listening...'
 
 @app.route('/powerreply', methods=['POST'])
