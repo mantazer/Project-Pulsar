@@ -31,10 +31,12 @@ def listen():
     # respone key ispOutage
     return 'listening...'
 
-@app.route('/ispreply', methods=['POST'])
+@app.route('/powerreply', methods=['POST'])
 def parse_reply():
     payload = request.form
-    print payload.get('ispOutage')
+    print payload.get('powerOutage')
+    print payload.get('twilioNumber')
+    return 'hi'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
