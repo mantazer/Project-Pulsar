@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, response
+from flask import Flask, request, redirect
 import twilio.twiml
 from twilio.rest import TwilioRestClient
  
@@ -17,7 +17,7 @@ def test_bench_ISP():
     """Respond to incoming calls with a simple text message."""
  
     resp = twilio.twiml.Response()
-    testing = response.data
+    testing = request.data
     print testing
     # resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
     resp.message(str("testing"))
