@@ -1,8 +1,5 @@
 __author__ = 'muntaserahmed'
 
-#TODO: create address model
-#TODO: check input format
-
 class Beacon:
     def __init__(self, h_address, e_address, phone):
         self.h_address = h_address
@@ -14,8 +11,8 @@ class Beacon:
         return payload
     
 def prompt():
-    h_address = raw_input('Enter home address (ex: 123 1st Street, Charlottesville, VA 22903')
+    h_address = raw_input('Enter home address (Street address, City, State Zip: ')
     e_address = raw_input('Enter email address: ')
-    phone = raw_input('Enter phone number (ex: +14341234567): ')
+    phone = raw_input('Enter phone number (+1##########): ')
     return Beacon(h_address, e_address, phone)
 
