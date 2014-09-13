@@ -3,6 +3,7 @@ import twilio.twiml
 from twilio.rest import TwilioRestClient
 import random
 import urllib2
+import pdb
  
 app = Flask(__name__)
 
@@ -51,6 +52,7 @@ def test_bench_ISP():
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
+	pdb.set_trace()
     fromValue = request.form['From']
     bodyValue = request.form['Body']
     toValue = request.form['To']
