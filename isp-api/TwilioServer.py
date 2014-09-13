@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 SendGridUserName = "b-ball225"
 SendGridPassword = "Basketball1"
-FromEmail = "inbound@b-ball225.bymail.in"
+FromEmail = "project_pulsar@gautamk.us"
 
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
