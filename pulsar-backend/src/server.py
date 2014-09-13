@@ -6,7 +6,7 @@ app = Flask(__name__)
 def register():
     if request.method == 'POST':
         payload = request.form
-        return Response(response=json.dumps({}))         
+        return Response(response=json.dumps({}), status=200)         
 
 @app.route('/listen')
 def listen():
