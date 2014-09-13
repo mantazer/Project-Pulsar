@@ -22,6 +22,10 @@ number = ""
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
 def start_process():
+	global emailValue
+	global personalNumber
+	global number
+
 	account_sid = "ACe36f8844f05de80021faa460764b6d33"
 	auth_token  = "f22d67391209d2a4f8f54266cd721978"
 	client = TwilioRestClient(account_sid, auth_token)
