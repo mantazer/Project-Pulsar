@@ -34,6 +34,9 @@ def test_bench_ISP():
     fromValue = request.form['From']
     bodyValue = request.form['Body']
     toValue = request.form['To']
+
+    print bodyValue
+
     if(str(bodyValue) == "OUT"):
     	outOrNot = random.randint(0,9)
     	if(outOrNot <= 4):
