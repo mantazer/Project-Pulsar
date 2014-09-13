@@ -105,7 +105,7 @@ def show_result():
 
     return str(ispOutage)
 
-@app.route("/sendgrid", methods=['POST'])
+@app.route("/project_pulsar", methods=['POST'])
 def sendgrid():
 	print "HTTP/1.1 200 OK"
 
