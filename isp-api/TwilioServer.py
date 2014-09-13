@@ -22,13 +22,13 @@ def test_bench_ISP():
     resp.message(str(testing))
     return str(resp)
 
-@app.route("/NotISPFault", methods=['GET', 'POST'])
-def test_bench_ISP():
-    """Respond to incoming calls with a simple text message."""
+# @app.route("/NotISPFault", methods=['GET', 'POST'])
+# def test_bench_ISP():
+#     """Respond to incoming calls with a simple text message."""
  
-    resp = twilio.twiml.Response()
-    resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
-    return str(resp)
+#     resp = twilio.twiml.Response()
+#     resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
+#     return str(resp)
 
 def sendTwilioSMS():
 	# CHANGE THIS FROM TEST
