@@ -68,7 +68,7 @@ def recieve_result():
 
 	payload = json.dumps({'ispOutage': value})
 
-	#r = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", payload)
+	r = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", payload)
 
 	return "Test"
 
