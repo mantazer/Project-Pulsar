@@ -11,8 +11,8 @@ class Beacon:
         return payload
     
 def prompt():
-    h_address = raw_input('Enter home address (Street Address, City, State Zip: ')
+    h_address = raw_input('Enter home address (Street address, City, State Zip: ')
     e_address = raw_input('Enter email address: ')
-    phone = raw_input('Enter phone number (+1XXXXXXXXXX): ')
+    phone = raw_input('Enter phone number (+1##########): ')
     return Beacon(h_address, e_address, phone)
 
