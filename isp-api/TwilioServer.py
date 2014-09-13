@@ -50,9 +50,6 @@ def start_process():
 
 @app.route("/ISPFault", methods=['GET', 'POST'])
 def test_bench_ISP():
-	account_sid = "ACe36f8844f05de80021faa460764b6d33"
-	auth_token  = "f22d67391209d2a4f8f54266cd721978"
-	client = TwilioRestClient(account_sid, auth_token)
 
 	resp = twilio.twiml.Response()
 	fromValue = request.form['From']
@@ -85,6 +82,11 @@ def test_bench_ISP():
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
+
+	account_sid = "ACe36f8844f05de80021faa460764b6d33"
+	auth_token  = "f22d67391209d2a4f8f54266cd721978"
+	client = TwilioRestClient(account_sid, auth_token)
+
 	global numberTwo
 	# pdb.set_trace()
 	fromValue = request.form['From']
