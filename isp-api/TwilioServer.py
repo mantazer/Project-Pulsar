@@ -13,7 +13,7 @@ def hello_monkey():
     return str(resp)
 
 @app.route("/NotShortCode", methods=['GET', 'POST'])
-def hello_monkey():
+def test_bench():
     """Respond to incoming calls with a simple text message."""
  
     resp = twilio.twiml.Response()
