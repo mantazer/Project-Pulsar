@@ -151,7 +151,7 @@ def sendgrid():
 
 	value = "True"
 
-	payloads = json.dumps({'powerOutage': value, 'twilioNumber': str(number)})
+	payloads = {'powerOutage': value, 'twilioNumber': str(number)}
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payloads)
 
 	return "HTTP/1.1 200 OK"
