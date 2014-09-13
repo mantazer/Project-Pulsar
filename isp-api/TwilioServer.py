@@ -53,21 +53,21 @@ def test_bench_ISP():
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
 	pdb.set_trace()
-    fromValue = request.form['From']
-    bodyValue = request.form['Body']
-    toValue = request.form['To']
-    print "Body: " + bodyValue
-    print "From: " + fromValue
-    print "To: " + toValue
+	fromValue = request.form['From']
+	bodyValue = request.form['Body']
+	toValue = request.form['To']
+	print "Body: " + bodyValue
+	print "From: " + fromValue
+	print "To: " + toValue
 
-    value = False
+	value = False
 
-    if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
-    	value = True
+	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
+		value = True
 
-    payload = {'ispOutage': value}
-    request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", params=payload)
-    return value
+	payload = {'ispOutage': value}
+	request = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", params=payload)
+	return value
 
 @app.route("/isp_reply", methods=['GET', 'POST'])
 def show_result():
