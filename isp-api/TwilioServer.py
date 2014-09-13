@@ -150,7 +150,7 @@ def sendgrid():
 
 	value = "True"
 
-	payload = {'ispOutage': value, 'twilio_number': number}
+	payload = {'powerOutage': value, 'twilioNumber': number}
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
 
 	return "HTTP/1.1 200 OK"
