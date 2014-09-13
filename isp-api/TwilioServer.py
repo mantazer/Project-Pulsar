@@ -107,6 +107,8 @@ def recieve_result():
 		value = "False"
 	elif(str(bodyValue).strip().lower() == "yes"):
 		value = "yes"
+	else:
+		value = "no"
 
 	if(value == "True"):
 		htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
@@ -125,6 +127,9 @@ def recieve_result():
 
 	elif(value == "yes"):
 		value = "True"
+
+	elif(value == "no"):
+		value = "False"
 
 	payload = {'powerOutage': value, 'twilioNumber': number}
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
