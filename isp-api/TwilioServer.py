@@ -105,7 +105,7 @@ def recieve_result():
 
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
 		value = "False"
-	else if(str(bodyValue).strip().lower() == "yes"):
+	elif(str(bodyValue).strip().lower() == "yes"):
 		value = "yes"
 
 	if(value == "True"):
@@ -123,7 +123,7 @@ def recieve_result():
 		to=str(personalNumber),    # Replace with your phone number
 		from_=str(number)) # Replace with your Twilio number
 
-	else if(value == "yes"):
+	elif(value == "yes"):
 		value = "True"
 
 	payload = {'powerOutage': value, 'twilioNumber': number}
