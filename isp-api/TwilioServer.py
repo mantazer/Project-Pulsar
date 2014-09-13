@@ -67,7 +67,7 @@ def recieve_result():
 		value = "True"
 
 	payload = json.dumps({'ispOutage': value})
-
+	pdb.set_trace()
 	r = requests.post("http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply", data=payload)
 
 	return "Test"
