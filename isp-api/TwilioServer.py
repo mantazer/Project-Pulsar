@@ -64,32 +64,21 @@ def test_bench_ISP():
 		outOrNot = random.randint(0,9)
 		if(outOrNot <= 4):
 			resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
-			
-			htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
-			sg = SendGridClient(SendGridUserName, SendGridPassword)
 
-			message = Mail()
-			#message.add_to('Gautam <raju@email.virginia.edu>')
-			message.add_to(emailValue)
-			message.set_subject('Is there a Power Outage at your house?')
-			message.set_html(htmlForEmail)
-			message.set_from(FromEmail)
-			status, msg = sg.send(message)
-
-			message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
-			to=str(personalNumber),    # Replace with your phone number
-			from_=str(number)) # Replace with your Twilio number
+			# message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+			# to=str(personalNumber),    # Replace with your phone number
+			# from_=str(number)) # Replace with your Twilio number
 		else:
 			resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-			message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
-			to=str(personalNumber),    # Replace with your phone number
-			from_=str(number)) # Replace with your Twilio number
+			# message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+			# to=str(personalNumber),    # Replace with your phone number
+			# from_=str(number)) # Replace with your Twilio number
 	else:
 		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-		message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
-		to=str(personalNumber),    # Replace with your phone number
-		from_=str(number)) # Replace with your Twilio number
-	#print str(resp)
+		# message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+		# to=str(personalNumber),    # Replace with your phone number
+		# from_=str(number)) # Replace with your Twilio number
+	print str(resp)
 	#print "ISP Fault Done"
 	return str(resp)
 
@@ -103,29 +92,43 @@ def recieve_result():
 	# print "From: " + fromValue
 	# print "To: " + toValue
 
-	value = "False"
+	value = "True"
 
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
-		value = "True"
+		value = "False"
 
-	payload = {'ispOutage': value, 'twilio_number': number}
+	if(value):
+		htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
+		sg = SendGridClient(SendGridUserName, SendGridPassword)
+
+		message = Mail()
+		#message.add_to('Gautam <raju@email.virginia.edu>')
+		message.add_to(emailValue)
+		message.set_subject('Is there a Power Outage at your house?')
+		message.set_html(htmlForEmail)
+		message.set_from(FromEmail)
+		status, msg = sg.send(message)
+
+	payload = {'powerOutage': value, 'twilioNumber': number}
 	#pdb.set_trace()
-	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/ispreply", data=payload)
+	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
+
+	print str(value)
 
 	return "Test"
 
-@app.route("/isp_reply", methods=['GET', 'POST'])
+@app.route("/powerreply", methods=['GET', 'POST'])
 def show_result():
-	ispOutage = request.form['ispOutage']
+	powerOutage = request.form['powerOutage']
 
 	# if(ispOutage):
 	# 	print "This is working"
 	# else:
 	# 	print "This is working (2)"
 
-	print "Outage: " + str(ispOutage)
+	print "Outage: " + str(powerOutage)
 
-	return str(ispOutage)
+	return str(powerOutage)
 
 #For Sendgrid
 @app.route("/inbound", methods=['POST'])
@@ -148,8 +151,7 @@ def sendgrid():
 	value = "True"
 
 	payload = {'ispOutage': value, 'twilio_number': number}
-	#pdb.set_trace()
-	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/ispreply", data=payload)
+	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
 
 	return "HTTP/1.1 200 OK"
  
