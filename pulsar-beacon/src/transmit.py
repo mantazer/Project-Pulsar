@@ -1,4 +1,4 @@
-from model import Beacon, prompt, jsonify_beacon
+from model import Beacon, prompt
 import requests
 
 PROTOCOL = 'http'
@@ -12,7 +12,7 @@ REGISTER_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + REGISTER_ENDPOINT
 
 def register():
     b = prompt()
-    payload = b.jsonify_beacon()  
+    payload = Beacon.jsonify_beacon(b)
     r = requests.post(REGISTER_URL, data=payload)
 
 def pulse():
