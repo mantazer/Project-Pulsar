@@ -28,13 +28,13 @@ def start_process():
 
 	emailValue = request.form['e_address']
     address = request.form['h_address']
-    number = request.form['twilio_phone']
-    personalNumber = request.form['personal_phone']
+	number = request.form['twilio_phone']
+	personalNumber = request.form['personal_phone']
 
 
 	message = client.messages.create(body="OUT",
-	    to="+14342008920",    # Replace with your phone number
-	    from_=str(number)) # Replace with your Twilio number
+		to="+14342008920",    # Replace with your phone number
+		from_=str(number)) # Replace with your Twilio number
 	 
 	# message = client.messages.create(body="OUT",
 	#     to="+14342008920",    # Replace with your phone number
@@ -45,18 +45,19 @@ def start_process():
 
 @app.route("/ISPFault", methods=['GET', 'POST'])
 def test_bench_ISP():
-    resp = twilio.twiml.Response()
-    fromValue = request.form['From']
-    bodyValue = request.form['Body']
-    toValue = request.form['To']
+	resp = twilio.twiml.Response()
+	fromValue = request.form['From']
+	bodyValue = request.form['Body']
+	toValue = request.form['To']
 
-    #print bodyValue
+	#print bodyValue
 
-    if(str(bodyValue) == "OUT"):
-    	outOrNot = random.randint(0,9)
-    	if(outOrNot <= 4):
-    		resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
-    		htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
+	if(str(bodyValue) == "OUT"):
+		outOrNot = random.randint(0,9)
+		if(outOrNot <= 4):
+			resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
+			
+			htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
 			sg = SendGridClient(SendGridUserName, SendGridPassword)
 
 			message = Mail()
@@ -68,21 +69,21 @@ def test_bench_ISP():
 			status, msg = sg.send(message)
 
 			message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
-		    to=str(personalNumber),    # Replace with your phone number
-		    from_=str(number)) # Replace with your Twilio number
-    	else:
-    		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-    		message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
-		    to=str(personalNumber),    # Replace with your phone number
-		    from_=str(number)) # Replace with your Twilio number
-    else:
-    	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
-    	message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+			to=str(personalNumber),    # Replace with your phone number
+			from_=str(number)) # Replace with your Twilio number
+		else:
+			resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
+			message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+			to=str(personalNumber),    # Replace with your phone number
+			from_=str(number)) # Replace with your Twilio number
+	else:
+		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
+		message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
 		to=str(personalNumber),    # Replace with your phone number
 		from_=str(number)) # Replace with your Twilio number
-    #print str(resp)
-    #print "ISP Fault Done"
-    return str(resp)
+	#print str(resp)
+	#print "ISP Fault Done"
+	return str(resp)
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
@@ -107,17 +108,17 @@ def recieve_result():
 
 @app.route("/isp_reply", methods=['GET', 'POST'])
 def show_result():
-    resp = twilio.twiml.Response()
-    ispOutage = request.form['ispOutage']
+	resp = twilio.twiml.Response()
+	ispOutage = request.form['ispOutage']
 
-    # if(ispOutage):
-    # 	print "This is working"
-    # else:
-    # 	print "This is working (2)"
+	# if(ispOutage):
+	# 	print "This is working"
+	# else:
+	# 	print "This is working (2)"
 
-    print "Outage: " + str(ispOutage)
+	print "Outage: " + str(ispOutage)
 
-    return str(ispOutage)
+	return str(ispOutage)
 
 #For Sendgrid
 @app.route("/inbound", methods=['POST'])
