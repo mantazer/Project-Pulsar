@@ -1,4 +1,4 @@
-from model import Beacon, prompt
+from model import Beacon
 import requests
 
 PROTOCOL = 'http'
@@ -10,9 +10,14 @@ REGISTER_ENDPOINT = '/register'
 REGISTER_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + REGISTER_ENDPOINT
 
 
-def register():
-    b = prompt()
-    payload = Beacon.jsonify_beacon(b)
+def prompt():
+    h_address = raw_input('Enter home address (Street address, City, State Zip: ')
+    e_address = raw_input('Enter email address: ')
+    phone = raw_input('Enter phone number (+1##########): ')
+    return Beacon(h_address, e_address, phone)
+
+def register(beacon):
+    payload = Beacon.jsonify_beacon(beacon)
     r = requests.post(REGISTER_URL, data=payload)
     
     if r.ok:
@@ -21,12 +26,12 @@ def register():
         print "Registration failed"
 
 def pulse():
-    return 'pulse'
+    pass    
 
 def run():
-    register_prompt()
-    pulse() 
+    b = prompt()
+    register(b)
 
 if __name__ == '__main__':
-    register()
+    run()
 
