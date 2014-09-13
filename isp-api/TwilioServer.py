@@ -15,6 +15,9 @@ app = Flask(__name__)
 SendGridUserName = "b-ball225"
 SendGridPassword = "Basketball1"
 FromEmail = "inbound@b-ball225.bymail.in"
+emailValue = ""
+personalNumber = ""
+number = ""
 
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
@@ -23,29 +26,19 @@ def start_process():
 	auth_token  = "f22d67391209d2a4f8f54266cd721978"
 	client = TwilioRestClient(account_sid, auth_token)
 
-	# email = request.form['e_address']
- #    address = request.form['h_address']
- #    number = request.form['phone']
+	emailValue = request.form['e_address']
+    address = request.form['h_address']
+    number = request.form['twilio_phone']
+    personalNumber = request.form['personal_phone']
 
-	# message = client.messages.create(body="OUT",
-	#     to="+14342008920",    # Replace with your phone number
-	#     from_=str(number)) # Replace with your Twilio number
-	 
+
 	message = client.messages.create(body="OUT",
 	    to="+14342008920",    # Replace with your phone number
-	    from_="+15033964667") # Replace with your Twilio number
-
-	#sending e-mail
-	htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
-	sg = SendGridClient(SendGridUserName, SendGridPassword)
-
-	message = Mail()
-	message.add_to('Gautam <raju@email.virginia.edu>')
-	# message.add_to(email)
-	message.set_subject('Is there a Power Outage at your house?')
-	message.set_html(htmlForEmail)
-	message.set_from(FromEmail)
-	status, msg = sg.send(message)
+	    from_=str(number)) # Replace with your Twilio number
+	 
+	# message = client.messages.create(body="OUT",
+	#     to="+14342008920",    # Replace with your phone number
+	#     from_="+15033964667") # Replace with your Twilio number
 
 	#print message.sid
 	return "Hello World"
@@ -63,10 +56,30 @@ def test_bench_ISP():
     	outOrNot = random.randint(0,9)
     	if(outOrNot <= 4):
     		resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
+    		htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
+			sg = SendGridClient(SendGridUserName, SendGridPassword)
+
+			message = Mail()
+			#message.add_to('Gautam <raju@email.virginia.edu>')
+			message.add_to(emailValue)
+			message.set_subject('Is there a Power Outage at your house?')
+			message.set_html(htmlForEmail)
+			message.set_from(FromEmail)
+			status, msg = sg.send(message)
+
+			message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+		    to=str(personalNumber),    # Replace with your phone number
+		    from_=str(number)) # Replace with your Twilio number
     	else:
     		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
+    		message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+		    to=str(personalNumber),    # Replace with your phone number
+		    from_=str(number)) # Replace with your Twilio number
     else:
     	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
+    	message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
+		to=str(personalNumber),    # Replace with your phone number
+		from_=str(number)) # Replace with your Twilio number
     #print str(resp)
     #print "ISP Fault Done"
     return str(resp)
