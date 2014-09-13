@@ -105,9 +105,8 @@ def show_result():
 
     return str(ispOutage)
 
-@app.route("/sendgrid", methods=['GET', 'POST'])
+@app.route("/sendgrid", methods=['POST'])
 def sendgrid():
-	# Required response to SendGrid.com’s Parse API
 	print "HTTP/1.1 200 OK"
 
 	# Consume the entire email
