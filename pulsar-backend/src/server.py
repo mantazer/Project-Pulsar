@@ -8,8 +8,8 @@ import threading
 app = Flask(__name__)
 mongodb = MongoDB()
 
-thread = threading.Thread(target=mongodb.find_outdated, args=(1,))
-
+# thread = threading.Thread(target=mongodb.find_outdated, args=(1,))
+# thread.start()
 
 @app.route('/')
 def index():
@@ -37,9 +37,9 @@ def register():
 
 @app.route('/listen', methods=['POST'])
 def listen():
-    # TODO: Scale this via threading
-    # hit /SendRequest
-    thread.start()
+    payload = request.form
+    h_address = payload.get('h_address')
+    db.beacon_collection.update({'h_address': h_address}, {'$set': {'last_pulse': time.time()}}, upsert = False)
     return 'listening...'
 
 @app.route('/powerreply', methods=['POST'])

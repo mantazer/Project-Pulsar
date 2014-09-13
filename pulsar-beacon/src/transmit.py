@@ -32,15 +32,16 @@ def register(beacon):
     else:
         print "Registration failed"
 
-def pulse():
+def pulse(beacon):
     while True:
-        r = requests.post(LISTEN_URL)
+        payload = Beacon.jsonify_beacon(beacon)
+        r = requests.post(LISTEN_URL, data=payload)
         time.sleep(2)
 
 def run():
     b = prompt()
     register(b)
-    pulse()
+    pulse(b)
 
 if __name__ == '__main__':
     run()
