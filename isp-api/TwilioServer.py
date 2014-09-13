@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 SendGridUserName = "b-ball225"
 SendGridPassword = "Basketball1"
-FromEmail = "project_pulsar@gautamk.us"
+FromEmail = "inbound@b-ball225.bymail.in"
 
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
@@ -125,8 +125,8 @@ def sendgrid():
 
 	value = "True"
 
-	# payload = {'ispOutage': value}
-	# r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+	payload = {'ispOutage': value}
+	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
 
 	return "HTTP/1.1 200 OK"
  
