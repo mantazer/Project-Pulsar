@@ -106,10 +106,9 @@ def recieve_result():
 
 	if(str(bodyValue) == "An outage was reported in your area. We expect this to be resolved by 6pm today."):
 		value = "False"
+
 	elif(str(bodyValue).strip().lower() == "yes"):
 		value = "yes"
-	else:
-		value = "no"
 
 	if(value == "True"):
 		htmlForEmail = '<html><body><img src=\"http://wedte.com/wp-content/uploads/2013/01/PowerOutage.jpg\" alt=\"Power Outage\"><p></p><p></p><h3> We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster. <p></p><br><br></h3></body></html>'
