@@ -12,7 +12,7 @@ class MongoDB:
             beacon_id = self.beacon_collection.insert(beacon_data)
             return beacon_id
 
-    def find_outdated(i):
+    def find_outdated(self, i):
         while True:
             print i
             time.sleep(1)
