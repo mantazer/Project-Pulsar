@@ -60,10 +60,11 @@ def test_bench_ISP():
 	bodyValue = value.get('Body')
 	toValue = value.get('To')
 
-	#print bodyValue
+	print bodyValue
 
 	if(str(bodyValue) == "OUT"):
 		outOrNot = random.randint(0,9)
+		print ourOrNot
 		if(outOrNot <= 4):
 			resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
 
