@@ -52,7 +52,7 @@ def test_bench_ISP():
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
-	pdb.set_trace()
+	#pdb.set_trace()
 	print request
 	# fromValue = request.form['From']
 	# bodyValue = request.form['Body']
