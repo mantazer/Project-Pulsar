@@ -31,6 +31,10 @@ def listen():
     # respone key ispOutage
     return 'listening...'
 
+@app.route('/ispreply')
+def parse_reply():
+    payload = request.form
+    print payload.get('ispOutage')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
