@@ -31,7 +31,7 @@ def listen():
     # respone key ispOutage
     return 'listening...'
 
-@app.route('/ispreply', methods=['POST'))
+@app.route('/ispreply', methods=['POST'])
 def parse_reply():
     payload = request.form
     print payload.get('ispOutage')
