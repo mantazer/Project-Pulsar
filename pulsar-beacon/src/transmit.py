@@ -7,8 +7,10 @@ HOST = 'ec2-54-68-73-74.us-west-2.compute.amazonaws.com'
 PORT = 5000
 
 REGISTER_ENDPOINT = '/register'
+LISTEN_ENDPOINT = '/listen'
 
 REGISTER_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + REGISTER_ENDPOINT
+LISTEN_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + LISTEN_ENDPOINT
 
 
 def prompt():
@@ -31,11 +33,14 @@ def register(beacon):
         print "Registration failed"
 
 def pulse():
-    pass    
+    while True:
+        r = requests.post(LISTEN_URL)
+        time.sleep(2)
 
 def run():
     b = prompt()
     register(b)
+    pulse()
 
 if __name__ == '__main__':
     run()

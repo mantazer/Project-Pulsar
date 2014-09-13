@@ -8,6 +8,9 @@ import threading
 app = Flask(__name__)
 mongodb = MongoDB()
 
+thread = threading.Thread(target=mongodb.find_outdated, args=(1,))
+
+
 @app.route('/')
 def index():
     return 'working'
@@ -36,8 +39,7 @@ def register():
 def listen():
     # TODO: Scale this via threading
     # hit /SendRequest
-    t = threading.Thread(target=mongodb.find_outdated, args=(1,))
-    t.start()
+    thread.start()
     return 'listening...'
 
 @app.route('/powerreply', methods=['POST'])
