@@ -136,7 +136,6 @@ def sendgrid():
 
 	global number
 
-
 	# Consume the entire email
 	envelope = simplejson.loads(request.form.get('envelope'))
 
@@ -152,8 +151,8 @@ def sendgrid():
 
 	value = "True"
 
-	payload = {'powerOutage': value, 'twilioNumber': number}
-	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
+	payloads = json.dumps({'powerOutage': value, 'twilioNumber': number})
+	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payloads)
 
 	return "HTTP/1.1 200 OK"
  
