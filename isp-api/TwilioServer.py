@@ -11,7 +11,7 @@ import simplejson
  
 app = Flask(__name__)
 
-SendGridUserName = "b_ball225"
+SendGridUserName = "b-ball225"
 SendGridPassword = "Basketball1"
 FromEmail = "project_pulsar@gautamk.us"
 
@@ -22,9 +22,9 @@ def start_process():
 	auth_token  = "f22d67391209d2a4f8f54266cd721978"
 	client = TwilioRestClient(account_sid, auth_token)
 
-	# email = request.form['emailAddress']
- #    address = request.form['address']
- #    number = request.form['phoneNumber']
+	# email = request.form['e_address']
+ #    address = request.form['h_address']
+ #    number = request.form['phone']
 
 	# message = client.messages.create(body="OUT",
 	#     to="+14342008920",    # Replace with your phone number
@@ -105,7 +105,8 @@ def show_result():
 
     return str(ispOutage)
 
-@app.route("/project_pulsar", methods=['POST'])
+#For Sendgrid
+@app.route("/inbound", methods=['POST'])
 def sendgrid():
 	print "HTTP/1.1 200 OK"
 
@@ -121,8 +122,8 @@ def sendgrid():
 
 	value = "True"
 
-	payload = {'ispOutage': value}
-	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+	# payload = {'ispOutage': value}
+	# r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
 
 	return value
  
