@@ -7,6 +7,7 @@ import pdb
 import json
 import requests
 import sendgrid
+import simplejson
  
 app = Flask(__name__)
 
@@ -104,7 +105,26 @@ def show_result():
 
     return str(ispOutage)
 
-#http://ec2-54-165-202-14.compute-1.amazonaws.com:5000/isp_reply
+@app.route("/sendgrid", methods=['POST'])
+def sendgrid():
+	print "HTTP/1.1 200 OK"
+
+	# Consume the entire email
+	envelope = simplejson.loads(request.form.get('envelope'))
+
+	# Get some header information
+	to_address = envelope['to'][0]
+	from_address = envelope['from']
+
+	print to_address
+	print from_address
+
+	value = "True"
+
+	payload = {'ispOutage': value}
+	r = requests.post("http://ec2-54-164-3-245.compute-1.amazonaws.com:5000/isp_reply", data=payload)
+
+	return value
  
 if __name__ == "__main__":
     app.run(host="0.0.0.0", threaded=True)
