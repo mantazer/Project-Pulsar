@@ -104,15 +104,17 @@ def recieve_result():
 		sg = SendGridClient(SendGridUserName, SendGridPassword)
 
 		message = Mail()
-		#message.add_to('Gautam <raju@email.virginia.edu>')
 		message.add_to(emailValue)
 		message.set_subject('Is there a Power Outage at your house?')
 		message.set_html(htmlForEmail)
 		message.set_from(FromEmail)
 		status, msg = sg.send(message)
 
+		message = client.messages.create(body="We think that your house may have a power outage. If this is true, simply reply to this e-mail with any response so that the Electricty Supplier can serve you faster.",
+		to=str(personalNumber),    # Replace with your phone number
+		from_=str(number)) # Replace with your Twilio number
+
 	payload = {'powerOutage': value, 'twilioNumber': number}
-	#pdb.set_trace()
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
 
 	numberTwo = number
