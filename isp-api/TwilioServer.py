@@ -7,6 +7,7 @@ import pdb
 import json
 import requests
 import sendgrid
+import simplejson
  
 app = Flask(__name__)
 
