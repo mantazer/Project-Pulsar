@@ -7,7 +7,7 @@ class MongoDB:
 
     def add_if_not_exists(self, beacon):
         if db.beacon_collection.find_one({'h_address': beacon.h_address}) is None:
-            beacon_data = {'h_address': beacon.h_address, 'e_address': beacon.e_address, 'phone': beacon.phone}i
+            beacon_data = {'h_address': beacon.h_address, 'e_address': beacon.e_address, 'phone': beacon.phone}
             beacon_id = node_collection.insert(node_data)
             return beacon_id
 
