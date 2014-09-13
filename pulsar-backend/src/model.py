@@ -1,7 +1,7 @@
 __author__ = 'muntaserahmed'
 
 class Beacon:
-    def __init__(self, h_address, e_address, twilio_phone, personal_phone):
+    def __init__(self, h_address, e_address, twilio_phone, personal_phone, last_pulse, is_dead):
         self.h_address = h_address
         self.e_address = e_address
         self.twilio_phone = '+15033964667' # testing purposes

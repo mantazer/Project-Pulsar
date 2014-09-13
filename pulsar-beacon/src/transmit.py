@@ -15,7 +15,7 @@ def prompt():
     e_address = raw_input('Enter email address: ')
     twilio_phone = raw_input('Enter provided twilio phone number (+1##########): ')
     personal_phone = raw_input('Enter personal phone number: (+1##########): ')
-    return Beacon(h_address, e_address, twilio_phone, personal_phone)
+    return Beacon(h_address, e_address, twilio_phone, personal_phone, 0, 0)
 
 def register(beacon):
     payload = Beacon.jsonify_beacon(beacon)
