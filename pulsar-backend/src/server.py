@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
-       print request.data
+       print request.form
 
 @app.route('/listen')
 def listen():
