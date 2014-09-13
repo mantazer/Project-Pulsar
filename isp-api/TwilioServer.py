@@ -18,6 +18,7 @@ FromEmail = "inbound@b-ball225.bymail.in"
 emailValue = ""
 personalNumber = ""
 number = ""
+numberTwo = ""
 
 
 @app.route("/SendRequest", methods=['GET', 'POST'])
@@ -84,6 +85,7 @@ def test_bench_ISP():
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
+	global numberTwo
 	# pdb.set_trace()
 	fromValue = request.form['From']
 	bodyValue = request.form['Body']
@@ -113,7 +115,10 @@ def recieve_result():
 	#pdb.set_trace()
 	r = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payload)
 
+	numberTwo = number
+
 	print str(value)
+	print numberTwo
 
 	return "Test"
 
@@ -134,10 +139,6 @@ def show_result():
 @app.route("/inbound", methods=['POST'])
 def sendgrid():
 
-	global number
-
-	globalNumber = number
-
 	# Consume the entire email
 	envelope = simplejson.loads(request.form.get('envelope'))
 
@@ -153,7 +154,7 @@ def sendgrid():
 
 	value = "True"
 
-	payloads = {'powerOutage': value, 'twilioNumber': globalNumber}
+	payloads = {'powerOutage': value, 'twilioNumber': numberTwo}
 	ra = requests.post("http://ec2-54-68-73-74.us-west-2.compute.amazonaws.com:5000/powerreply", data=payloads)
 
 	return "HTTP/1.1 200 OK"
