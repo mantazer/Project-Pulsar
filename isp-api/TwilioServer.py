@@ -45,11 +45,11 @@ def test_bench_ISP():
     		resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
     else:
     	resp.message("We are not currently aware of a service outage in your area. If you are having trouble with your service, please call 1-800-COMCAST.")
+    print str(resp)
     return str(resp)
 
 @app.route("/RecieveResult", methods=['GET', 'POST'])
 def recieve_result():
-    resp = twilio.twiml.Response()
     fromValue = request.form['From']
     bodyValue = request.form['Body']
     toValue = request.form['To']
