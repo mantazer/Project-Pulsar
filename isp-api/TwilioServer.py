@@ -110,7 +110,7 @@ def sendgrid():
 	print "HTTP/1.1 200 OK"
 
 	# Consume the entire email
-	envelope = simplejson.loads(request.form.get(‘envelope’))
+	envelope = simplejson.loads(request.form.get('envelope'))
 
 	# Get some header information
 	to_address = envelope['to'][0]
