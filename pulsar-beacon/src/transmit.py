@@ -16,14 +16,12 @@ LISTEN_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + LISTEN_ENDPOINT
 def prompt():
     h_address = raw_input('Enter home address (Street address, City, State Zip): ')
     e_address = raw_input('Enter email address: ')
-    twilio_phone = raw_input('Enter provided twilio phone number (+1##########): ')
-    personal_phone = raw_input('Enter personal phone number: (+1##########): ')
+    personal_phone = raw_input('Enter personal phone number: ')
     last_pulse = time.time()
     is_dead = 0
     return Beacon(h_address, e_address, twilio_phone, personal_phone, last_pulse, is_dead)
 
 def register(beacon):
-    print beacon.last_pulse
     payload = Beacon.jsonify_beacon(beacon)
     r = requests.post(REGISTER_URL, data=payload)
     
