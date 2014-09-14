@@ -15,6 +15,10 @@ Created at PennApps X by Muntaser Ahmed and Gautam Kanumuru.
 1. On the beacon, execute `python transmit.py` (found in /pulsar-beacon/src/)
 2. Fill out the on-screen information.
 
+We used an Intel Edison as our beacon.
+
+![alt tag](http://i.imgur.com/e2IbAvj.gif)
+
 Note: The two steps above are the only steps the distributor has to complete in order to successfully install a beacon in a customer's house.
 
 The following steps describe running the gateway node and ISP server software.
