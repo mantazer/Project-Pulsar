@@ -34,6 +34,7 @@ def register(beacon):
 def pulse(beacon):
     while True:
         payload = Beacon.jsonify_beacon(beacon)
+        print 'pulsing...'
         r = requests.post(LISTEN_URL, data=payload)
         time.sleep(2)
 

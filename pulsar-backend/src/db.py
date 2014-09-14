@@ -48,7 +48,6 @@ class MongoDB:
                             print 'Unable to notify ISP API'
 
                         return
-                print 'pulsing...'
             time.sleep(5)
 
 
