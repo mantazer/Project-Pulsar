@@ -18,6 +18,7 @@ Created at PennApps X by Muntaser Ahmed and Gautam Kanumuru.
 We used an Intel Edison as our beacon.
 
 ![alt tag](http://i.imgur.com/e2IbAvj.gif)
+Demo: http://youtu.be/39Q1j3Qh_a4
 
 Note: The two steps above are the only steps the distributor has to complete in order to successfully install a beacon in a customer's house.
 
