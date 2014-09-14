@@ -39,7 +39,7 @@ class MongoDB:
                         print 'DEAD BEACON AT ' + beacon.get('h_address')
                         self.beacon_collection.update({'h_address': h_address}, {'$set': {'is_dead': 1}}, upsert = False)
                         payload = {'h_address': h_address, 'e_address': e_address, 'twilio_phone': twilio_phone, 'personal_phone': personal_phone}
-                        r = requests(SEND_REQUEST_URL, data=payload)
+                        r = requests.post(SEND_REQUEST_URL, data=payload)
 
                         if r.ok:
                             print 'ISP API notified'
