@@ -63,10 +63,10 @@ def test_bench_ISP():
 	print bodyValue
 
 	if(str(bodyValue) == "OUT"):
-		outOrNot = random.randint(0,9)
+		#outOrNot = random.randint(0,9)
+		outOrNot = 8
 		print outOrNot
-		#if(outOrNot <= 4):
-		if(True):
+		if(outOrNot <= 4):
 			resp.message("An outage was reported in your area. We expect this to be resolved by 6pm today.")
 
 			# message = client.messages.create(body="An outage was reported in your area. We expect this to be resolved by 6pm today.",
