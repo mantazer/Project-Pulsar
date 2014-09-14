@@ -10,6 +10,7 @@ Our backend servers keep track of the status of every beacon connected to the ov
 This is just the first iteration of what we hope will become a useful product for millions of households. By combining inexpensive, widely available hardware with a powerful backend, we are able to provide a unique solution to a very real and pressing issue.
 
 Created at PennApps X by Muntaser Ahmed and Gautam Kanumuru.
+Demo: http://youtu.be/39Q1j3Qh_a4
 
 #Setup
 1. On the beacon, execute `python transmit.py` (found in /pulsar-beacon/src/)
@@ -18,7 +19,6 @@ Created at PennApps X by Muntaser Ahmed and Gautam Kanumuru.
 We used an Intel Edison as our beacon.
 
 ![alt tag](http://i.imgur.com/e2IbAvj.gif)
-Demo: http://youtu.be/39Q1j3Qh_a4
 
 Note: The two steps above are the only steps the distributor has to complete in order to successfully install a beacon in a customer's house.
 
