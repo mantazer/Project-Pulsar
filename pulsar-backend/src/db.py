@@ -12,14 +12,13 @@ class MongoDB:
             beacon_id = self.beacon_collection.insert(beacon_data)
             return beacon_id
 
-    def find_outdated(self, beacon):
+    def find_outdated(self):
         while True:
-            h_address = beacon.h_address
-            beacon_data = self.beacon_collection.find_one({'h_address': h_address})
-            last_pulse = beacon_data.get('last_pulse')
-
-            if time.time() - float(last_pulse) > 5:
-                print 'Dead Beacon at: ' + h_address
+            beacons = self.beacon_collection.find()
+            for beacon in beacons:
+                last_pulse = beacon.get('last_pulse')
+                if time.time() - float(last_pulse) > 5:
+                    print 'DEAD BEACON AT ' + beacon.get('h_address')
 
             time.sleep(5)
 

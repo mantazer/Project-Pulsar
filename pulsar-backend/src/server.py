@@ -9,7 +9,7 @@ import time
 app = Flask(__name__)
 mongodb = MongoDB()
 
-thread = threading.Thread(target=mongodb.find_outdated, args=["hi"])
+thread = threading.Thread(target=mongodb.find_outdated)
 thread.start()
 
 @app.route('/')
