@@ -16,6 +16,7 @@ LISTEN_URL = PROTOCOL + '://' + HOST + ':' + str(PORT) + LISTEN_ENDPOINT
 def prompt():
     h_address = raw_input('Enter home address (Street address, City, State Zip): ')
     e_address = raw_input('Enter email address: ')
+    twilio_phone = 0
     personal_phone = raw_input('Enter personal phone number: ')
     last_pulse = time.time()
     is_dead = 0
