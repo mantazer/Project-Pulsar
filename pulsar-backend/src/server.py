@@ -41,15 +41,14 @@ def listen():
     payload = request.form
     h_address = payload.get('h_address')
     mongodb.beacon_collection.update({'h_address': h_address}, {'$set': {'last_pulse': time.time()}}, upsert = False)
-    return 'listening...'
+    return '{}'
 
 @app.route('/powerreply', methods=['POST'])
 def parse_reply():
     payload = request.form
-    print payload.get('powerOutage')
-    print payload.get('twilioNumber')
-    return 'hi'
-
+    print 'Power Outage: ' + payload.get('powerOutage')
+    print 'Corresponding Beacon: ' + payload.get('twilioNumber')
+    return '{}'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
